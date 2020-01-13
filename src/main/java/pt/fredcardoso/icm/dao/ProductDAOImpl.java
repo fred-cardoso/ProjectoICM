@@ -6,22 +6,26 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import pt.fredcardoso.icm.model.Product;
 
 public class ProductDAOImpl implements ProductDAO {
-
+	
+	@Autowired
+	private UserDAO userDAO;
 	private JdbcTemplate jdbcTemplate;
+	
 
 	public ProductDAOImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	public Product create(Product product) {
-		String sql = "INSERT INTO product (description, minimum_sale_price, auction_period, award_mode) VALUES (?, ?, ?, ?)";
-		if (jdbcTemplate.update(sql, product.getDescription(), product.getMinimumSalePrice(), product.getAuctionPeriod(), product.getAwardMode()) > 0) {
+		String sql = "INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)";
+		if (jdbcTemplate.update(sql, product.getName(),  product.getDescription(), product.getMinimumSalePrice(), product.getAuctionPeriod(), product.getAwardMode(), product.getUser().getId()) > 0) {
 			return this.read(product.getId()).get(0);
 		} else {
 			return null;
@@ -61,10 +65,12 @@ public class ProductDAOImpl implements ProductDAO {
 			Product product = new Product();
 
 			product.setId(rs.getInt("id"));
+			product.setName(rs.getString("name"));
 			product.setDescription(rs.getString("description"));
 			product.setMinimumSalePrice(rs.getDouble("minimum_sale_price"));
 			product.setAuctionPeriod(rs.getDate("auction_period"));
 			product.setAwardMode(rs.getString("award_mode"));
+			product.setUser(userDAO.read(rs.getInt("userId")).get(0));
 
 			return product;
 		}

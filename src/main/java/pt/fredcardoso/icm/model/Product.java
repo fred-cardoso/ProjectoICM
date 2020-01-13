@@ -12,6 +12,8 @@ public class Product {
 	private double minimumSalePrice;
 	private Date auctionPeriod;
 	private String awardMode;
+	private String name;
+	private User user;
 
 	public int getId() {
 		return id;
@@ -57,5 +59,19 @@ public class Product {
 	public String toString() {
 		return "Produto com ID: " + id + ", descrição: " + description + ", valor de venda minimo: " + minimumSalePrice
 				+ ", periodo de leilao: " + auctionPeriod + " e modo de premio: " + awardMode;
+	}
+
+	public String  getName() {
+		return name;
+	}
+	public void setName (String name) {
+		this.name = name;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
