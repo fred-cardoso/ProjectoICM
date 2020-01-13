@@ -44,11 +44,11 @@ public class ProductController {
 	@RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
 	public String product(@PathVariable(value = "id") int id, Model model) {
 
-		List<Product> user = productDao.read(id);
+		List<Product> product = productDao.read(id);
 
-		model.addAttribute("users", user);
+		model.addAttribute("product", product);
 
-		return "users/user.html";
+		return "products/details.html";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
