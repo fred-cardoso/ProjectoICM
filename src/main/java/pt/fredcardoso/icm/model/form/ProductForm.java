@@ -28,7 +28,16 @@ public class ProductForm implements Serializable {
 	@NotNull
 	@NotBlank
 	private String awardMode;
+	@NotNull
+	@NotBlank 
+	private String name;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getDescription() {
 		return description;
 	}

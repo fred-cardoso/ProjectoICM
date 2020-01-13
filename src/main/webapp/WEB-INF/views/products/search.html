@@ -33,6 +33,7 @@
 						<thead>
 							<tr>
 								<th>ID</th>
+								<th>Name</th>
 								<th>Valor máximo de venda</th>
 								<th>Prazo máximo de venda</th>
 								<th>Açoes</th>
@@ -50,8 +51,8 @@
 						<tbody>
 							<tr th:each="product : ${products}">
 								<td th:text="${product.getId()}">1</td>
-								<td th:text="${product.getName()}">1</td>
-								<td><a href="#" th:text="${product.getMinimumSalePrice()}"></a></td>
+								<td> <a href="#" th:text="${product.getName()}">1</a></td>
+								<td th:text="${product.getMinimumSalePrice()}"></td>
 								<td th:text="${product.getAuctionPeriod()}"></td>
 								<td><a th:href="@{'/products/delete/' + ${product.getId()}}"
 									class="btn btn-danger btn-circle btn-sm"> <i
