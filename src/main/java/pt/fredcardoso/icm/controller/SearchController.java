@@ -2,7 +2,11 @@ package pt.fredcardoso.icm.controller;
 
 
 
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +24,17 @@ public class SearchController {
 	@Autowired
 	private ProductDAO productDao;
 	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
-	public String search(Model model) {
+	public String search(Model model, HttpServletRequest searchRequest) {
+		System.out.println(searchRequest.getParameterValues("sh"));
 		String searchWord = "";
 		List<Product> products = productDao.read(-1);
+		List<Product> listProductsToShow = new ArrayList<Product>();
+		
+		for(Product product : products){
+			if(product.getName().contains(searchWord))
+				listProductsToShow.add(product);
+		}
+		
 		Search search = new Search();
 		search.setSearch(searchWord);
 		model.addAttribute("products", products);
