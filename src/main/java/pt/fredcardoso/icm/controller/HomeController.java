@@ -15,5 +15,12 @@ public class HomeController {
 
       return "index.html";
    }
+   
+   @RequestMapping(value = "/test", method = RequestMethod.GET)
+   public String test(ModelMap model) {      
+      //System.out.println(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+
+      return "test.html";
+   }
 
 }
