@@ -1,8 +1,5 @@
 package pt.fredcardoso.icm.controller;
 
-
-
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pt.fredcardoso.icm.dao.ProductDAO;
 import pt.fredcardoso.icm.model.Product;
-import pt.fredcardoso.icm.model.form.Search;
 
 @Controller
 @RequestMapping("/products")
@@ -25,20 +21,16 @@ public class SearchController {
 	private ProductDAO productDao;
 	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
 	public String search(Model model, HttpServletRequest searchRequest) {
-		System.out.println(searchRequest.getParameterValues("sh"));
-		String searchWord = "";
+		String searchWord = searchRequest.getParameter("sh");
 		List<Product> products = productDao.read(-1);
 		List<Product> listProductsToShow = new ArrayList<Product>();
 		
 		for(Product product : products){
-			if(product.getName().contains(searchWord))
+			if(product.getName().toLowerCase().contains(searchWord.toLowerCase()))
 				listProductsToShow.add(product);
 		}
 		
-		Search search = new Search();
-		search.setSearch(searchWord);
-		model.addAttribute("products", products);
-		model.addAttribute("search", search);
+		model.addAttribute("products", listProductsToShow);
 		
 
 		return "products/search.html";
