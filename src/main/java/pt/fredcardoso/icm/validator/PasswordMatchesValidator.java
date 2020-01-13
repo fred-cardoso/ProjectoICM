@@ -1,10 +1,10 @@
-package pt.fredcardoso.pt.validator;
+package pt.fredcardoso.icm.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import pt.fredcardoso.icm.model.form.RegisterForm;
-import pt.fredcardoso.pt.validator.annotation.PasswordMatches;
+import pt.fredcardoso.icm.validator.annotation.PasswordMatches;
 
 public class PasswordMatchesValidator 
 implements ConstraintValidator<PasswordMatches, Object> {

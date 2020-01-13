@@ -1,4 +1,4 @@
-package pt.fredcardoso.pt.validator.annotation;
+package pt.fredcardoso.icm.validator.annotation;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import pt.fredcardoso.pt.validator.PasswordMatchesValidator;
+import pt.fredcardoso.icm.validator.PasswordMatchesValidator;
 
 @Target({TYPE,ANNOTATION_TYPE}) 
 @Retention(RUNTIME)

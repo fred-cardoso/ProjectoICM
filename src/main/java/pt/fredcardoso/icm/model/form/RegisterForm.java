@@ -6,7 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import pt.fredcardoso.pt.validator.annotation.PasswordMatches;
+import pt.fredcardoso.icm.validator.annotation.PasswordMatches;
 
 @PasswordMatches
 public class RegisterForm implements Serializable {
