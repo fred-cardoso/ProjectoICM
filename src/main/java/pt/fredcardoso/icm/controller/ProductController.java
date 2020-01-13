@@ -44,7 +44,14 @@ public class ProductController {
 	@RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
 	public String product(@PathVariable(value = "id") int id, Model model) {
 
-		List<Product> product = productDao.read(id);
+		List<Product> products = productDao.read(id);
+		Product product = null;
+		
+		if(products == null) {
+			return "redirect:/404";
+		}
+		
+		product = products.get(0);
 
 		model.addAttribute("product", product);
 

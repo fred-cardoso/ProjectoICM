@@ -24,41 +24,14 @@
 		<!-- DataTales Example -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">Listagem</h6>
+				<h6 class="m-0 font-weight-bold text-primary">[[${product.getName()}]]</h6>
 			</div>
 			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Valor mínimo de venda</th>
-								<th>Prazo máximo de venda</th>
-								<th>Acções</th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th>ID</th>
-								<th>Valor mínimo de venda</th>
-								<th>Prazo máximo de venda</th>
-								<th>Acções</th>
-							</tr>
-						</tfoot>
-						<tbody>
-							<tr th:each="product : ${products}">
-								<td th:text="${product.getId()}">1</td>
-								<td><a href="#" th:text="${product.getMinimumSalePrice()}"></a></td>
-								<td th:text="${product.getAuctionPeriod()}"></td>
-								<td><a
-									th:href="@{'/products/delete/' + ${product.getId()}}"
-									class="btn btn-danger btn-circle btn-sm"> <i
-										class="fas fa-trash"></i>
-								</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<p>Nome do produto: [[${product.getName()}]]</p>
+				<p>Descrição do produto: [[${product.getName()}]]</p>
+				<p>Preço de venda mínimo: [[${product.getMinimumSalePrice()}]]</p>
+				<p>Período de leilão: [[${product.getAuctionPeriod()}]]</p>
+				<p>Vendedor: [[${product.getUser().getName()}]]</p>
 			</div>
 		</div>
 
