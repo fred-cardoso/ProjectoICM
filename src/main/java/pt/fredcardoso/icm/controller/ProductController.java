@@ -37,8 +37,6 @@ public class ProductController {
 		List<Product> products = productDao.read(-1);
 
 		model.addAttribute("products", products);
-		
-		System.out.println(products);
 
 		return "products/index.html";
 	}
@@ -107,5 +105,23 @@ public class ProductController {
 		redirectAttributes.addFlashAttribute("message", "Product deleted sucessfully!");
 
 		return "redirect:/products";
+	}
+	
+	@RequestMapping(value = { "/realtime" }, method = RequestMethod.GET)
+	public String realTime(Model model, RedirectAttributes redirectAttributes) {
+		
+		List<Product> products = productDao.read(-1);
+
+		model.addAttribute("products", products);
+
+		return "products/realtime.html";
+	}
+	
+	@RequestMapping(value = { "/realtime/{id}" }, method = RequestMethod.GET)
+	public String realTimeShowGraph(@PathVariable(value = "id") int id, Model model, RedirectAttributes redirectAttributes) {
+		
+		model.addAttribute("product", id);
+
+		return "products/graph.html";
 	}
 }
