@@ -32,22 +32,25 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Valor m√≠nimo de venda</th>
-								<th>Prazo m√°ximo de venda</th>
-								<th>Ac√ß√µes</th>
+								<th>Name</th>
+								<th>Valor m·ximo de venda</th>
+								<th>Prazo m·ximo de venda</th>
+								<th>AÁoes</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>ID</th>
-								<th>Valor m√≠nimo de venda</th>
-								<th>Prazo m√°ximo de venda</th>
-								<th>Ac√ß√µes</th>
+								<th>Name</th>
+								<th>Valor m·ximo de venda</th>
+								<th>Prazo m·ximo de venda</th>
+								<th>AÁoes</th>
 							</tr>
 						</tfoot>
 						<tbody>
 							<tr th:each="product : ${products}">
 								<td th:text="${product.getId()}">1</td>
+								<td> <a href="#" th:text="${product.getName()}">1</a></td>
 								<td><a th:href="@{'/products/' + ${product.getId()}}" th:text="${product.getMinimumSalePrice()}"></a></td>
 								<td th:text="${product.getAuctionPeriod()}"></td>
 								<td><a
