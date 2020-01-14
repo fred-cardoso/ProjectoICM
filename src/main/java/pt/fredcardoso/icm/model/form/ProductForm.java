@@ -23,7 +23,7 @@ public class ProductForm implements Serializable {
 	@DecimalMin(value = "0.0")
 	private double minimumSalePrice;
 	@NotNull
-	@DateTimeFormat
+	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm:ss a")
 	private Date auctionPeriod;
 	@NotNull
 	@NotBlank

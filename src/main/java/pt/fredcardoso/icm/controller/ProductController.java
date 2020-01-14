@@ -3,6 +3,7 @@ package pt.fredcardoso.icm.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pt.fredcardoso.icm.dao.ProductDAO;
 import pt.fredcardoso.icm.model.Product;
+import pt.fredcardoso.icm.model.User;
 import pt.fredcardoso.icm.model.form.ProductForm;
 import pt.fredcardoso.icm.services.ProductService;
 
@@ -66,13 +68,13 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(@Valid @ModelAttribute("product") ProductForm product, BindingResult result,
+	public String create(@Valid @ModelAttribute("product") ProductForm product, BindingResult result, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 
 		Product productCreated = null;
 
 		if (!result.hasErrors()) {
-			productCreated = productService.create(product);
+			productCreated = productService.create(product, (User) request.getSession().getAttribute("user"));
 		}
 
 		if (productCreated == null) {
