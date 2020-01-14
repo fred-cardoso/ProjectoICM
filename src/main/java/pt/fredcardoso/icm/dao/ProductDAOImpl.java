@@ -2,6 +2,8 @@ package pt.fredcardoso.icm.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -29,8 +31,9 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	public Product create(Product product) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String sql = "INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)";
-		if (jdbcTemplate.update(sql, product.getName(),  product.getDescription(), product.getMinimumSalePrice(), product.getAuctionPeriod(), product.getAwardMode(), product.getUser().getId()) > 0) {
+		if (jdbcTemplate.update(sql, product.getName(),  product.getDescription(), product.getMinimumSalePrice(), dateFormat.format(product.getAuctionPeriod()), product.getAwardMode(), product.getUser().getId()) > 0) {
 			System.out.println("criouuu");
 			return this.read(product.getId()).get(0);
 		} else {

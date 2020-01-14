@@ -14,12 +14,11 @@ public class ProductServiceImpl implements ProductService {
 
 	public Product create(ProductForm productForm, User user) {
 		Product product = new Product();
-		
-		product.setName(product.getName());
+		product.setName(productForm.getName());
 		product.setDescription(productForm.getDescription());
 		product.setMinimumSalePrice(productForm.getMinimumSalePrice());
 		product.setAuctionPeriod(productForm.getAuctionPeriod());
-		product.setAwardMode(product.getAwardMode());
+		product.setAwardMode(productForm.getAwardMode());
 		product.setUser(user);
 		
 		return productDao.create(product);

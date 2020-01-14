@@ -1,6 +1,8 @@
 package pt.fredcardoso.icm.model.form;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.DecimalMin;
@@ -23,7 +25,7 @@ public class ProductForm implements Serializable {
 	@DecimalMin(value = "0.0")
 	private double minimumSalePrice;
 	@NotNull
-	@DateTimeFormat(pattern="yyyy/MM/dd hh:mm:ss a")
+	@DateTimeFormat(pattern="yyyy/MM/dd HH:mm:ss")
 	private Date auctionPeriod;
 	@NotNull
 	@NotBlank
@@ -53,8 +55,13 @@ public class ProductForm implements Serializable {
 	public Date getAuctionPeriod() {
 		return auctionPeriod;
 	}
-	public void setAuctionPeriod(Date auctionPeriod) {
-		this.auctionPeriod = auctionPeriod;
+	public void setAuctionPeriod(String auctionPeriod) {
+		SimpleDateFormat dataFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		try {
+			this.auctionPeriod = dataFormat.parse(auctionPeriod);
+		} catch (ParseException e) {
+			this.auctionPeriod = null;
+		}
 	}
 	public String getAwardMode() {
 		return awardMode;
