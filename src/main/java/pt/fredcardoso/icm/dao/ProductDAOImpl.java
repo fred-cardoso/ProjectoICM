@@ -34,10 +34,8 @@ public class ProductDAOImpl implements ProductDAO {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String sql = "INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)";
 		if (jdbcTemplate.update(sql, product.getName(),  product.getDescription(), product.getMinimumSalePrice(), dateFormat.format(product.getAuctionPeriod()), product.getAwardMode(), product.getUser().getId()) > 0) {
-			System.out.println("criouuu");
 			return this.read(product.getId()).get(0);
 		} else {
-			System.out.println("get rekt");
 			return null;
 		}
 	}
