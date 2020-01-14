@@ -26,8 +26,10 @@ public class ProductDAOImpl implements ProductDAO {
 	public Product create(Product product) {
 		String sql = "INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)";
 		if (jdbcTemplate.update(sql, product.getName(),  product.getDescription(), product.getMinimumSalePrice(), product.getAuctionPeriod(), product.getAwardMode(), product.getUser().getId()) > 0) {
+			System.out.println("criouuu");
 			return this.read(product.getId()).get(0);
 		} else {
+			System.out.println("get rekt");
 			return null;
 		}
 	}
