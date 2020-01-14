@@ -31,27 +31,35 @@
 					<form role="form" action="#" method="post"
 						th:action="@{/products/create}" th:object="${product}">
 						<div class="col-lg-12">
+						
+						<div class="form-group">
+								<label>Nome do Produto</label> <input type="text"
+									class="form-control" th:field="*{name}">
+							</div>
 
 							<div class="form-group">
-								<label>Descri√ß√£o</label>
+								<label>DescriÁ„o</label>
 								<textarea class="form-control" rows="3"
 									th:field="*{description}"></textarea>
 							</div>
 							<div class="form-group">
-								<label>Valor m√≠nimo de venda</label> <input type="text"
+								<label>Valor m·nimo de venda</label> <input type="text"
 									class="form-control" th:field="*{minimumSalePrice}">
 							</div>
+							
+							
 							<div class="form-group">
-								<label>Prazo m√°ximo de venda</label> <input type="datetime"
+								<label>Prazo m·ximo de venda</label> <input type="datetime"
 									class="form-control" th:field="*{auctionPeriod}">
 							</div>
 							<div class="form-group">
-								<label>Modo de pr√©mio:</label> <select th:field="*{awardMode}">
-									<option th:value="'minValue'">Valor m√≠nimo</option>
-									<option th:value="'auctionPeriod'">Valor m√°ximo</option>
+								<label>Modo de prÈmio:</label> <select th:field="*{awardMode}">
+									<option th:value="'minValue'">Valor mÌnimo</option>
+									<option th:value="'auctionPeriod'">Valor m·ximo</option>
 								</select>
 							</div>
 						</div>
+
 						<button type="submit" class="btn btn-default" wfd-id="147">Submit
 							Button</button>
 						<button type="reset" class="btn btn-default" wfd-id="146">Reset
