@@ -11,11 +11,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import pt.fredcardoso.icm.model.Product;
+import pt.fredcardoso.icm.services.MultimediaService;
 
 public class ProductDAOImpl implements ProductDAO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private MultimediaService multimediaService; 
+	
 	private JdbcTemplate jdbcTemplate;
 	
 
@@ -71,6 +76,7 @@ public class ProductDAOImpl implements ProductDAO {
 			product.setAuctionPeriod(rs.getDate("auction_period"));
 			product.setAwardMode(rs.getString("award_mode"));
 			product.setUser(userDAO.read(rs.getInt("userId")).get(0));
+			product.setMultimedia(multimediaService.getMultimediaOfProduct(product.getId()));
 
 			return product;
 		}

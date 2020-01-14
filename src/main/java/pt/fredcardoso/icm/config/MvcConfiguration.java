@@ -27,11 +27,15 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
+import pt.fredcardoso.icm.dao.MultimediaDAO;
+import pt.fredcardoso.icm.dao.MultimediaDAOImpl;
 import pt.fredcardoso.icm.dao.ProductDAO;
 import pt.fredcardoso.icm.dao.ProductDAOImpl;
 import pt.fredcardoso.icm.dao.UserDAO;
 import pt.fredcardoso.icm.dao.UserDAOImpl;
 import pt.fredcardoso.icm.handlerInterceptors.AuthHandler;
+import pt.fredcardoso.icm.services.MultimediaService;
+import pt.fredcardoso.icm.services.MultimediaServiceImpl;
 import pt.fredcardoso.icm.services.ProductService;
 import pt.fredcardoso.icm.services.ProductServiceImpl;
 import pt.fredcardoso.icm.services.UserService;
@@ -121,11 +125,6 @@ public class MvcConfiguration implements WebMvcConfigurer, ApplicationContextAwa
 	public UserDAO getUserDAO() {
 		return new UserDAOImpl(getDataSource());
 	}
-	
-	@Bean
-	public ProductDAO getProductDAO() {
-		return new ProductDAOImpl(getDataSource());
-	}
 
 	@Bean
 	public UserService getUserService() {
@@ -133,7 +132,22 @@ public class MvcConfiguration implements WebMvcConfigurer, ApplicationContextAwa
 	}
 	
 	@Bean
+	public ProductDAO getProductDAO() {
+		return new ProductDAOImpl(getDataSource());
+	}
+	
+	@Bean
 	public ProductService getProductService() {
 		return new ProductServiceImpl();
+	}
+	
+	@Bean
+	public MultimediaDAO getMultimediaDAO() {
+		return new MultimediaDAOImpl(getDataSource());
+	}
+
+	@Bean
+	public MultimediaService getMultimediaService() {
+		return new MultimediaServiceImpl();
 	}
 }

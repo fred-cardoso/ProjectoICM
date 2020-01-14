@@ -32,6 +32,9 @@
 				<p>Preço de venda mínimo: [[${product.getMinimumSalePrice()}]]</p>
 				<p>Período de leilão: [[${product.getAuctionPeriod()}]]</p>
 				<p>Vendedor: [[${product.getUser().getName()}]]</p>
+				<th:block th:each="multimedia : ${product.getMultimedia()}">
+					<p th:text="${multimedia.path}"></p>
+				</th:block>
 			</div>
 		</div>
 

@@ -1,6 +1,7 @@
 package pt.fredcardoso.icm.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Product {
 
@@ -14,6 +15,7 @@ public class Product {
 	private String awardMode;
 	private String name;
 	private User user;
+	private List<Multimedia> multimedia;
 
 	public int getId() {
 		return id;
@@ -55,12 +57,6 @@ public class Product {
 		this.awardMode = awardMode;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto com ID: " + id + ", descrição: " + description + ", valor de venda minimo: " + minimumSalePrice
-				+ ", periodo de leilao: " + auctionPeriod + " e modo de premio: " + awardMode;
-	}
-
 	public String  getName() {
 		return name;
 	}
@@ -73,5 +69,19 @@ public class Product {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public List<Multimedia> getMultimedia() {
+		return multimedia;
+	}
+
+	public void setMultimedia(List<Multimedia> multimedia) {
+		this.multimedia = multimedia;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto com ID: " + id + ", descrição: " + description + ", valor de venda minimo: " + minimumSalePrice
+				+ ", periodo de leilao: " + auctionPeriod + " e modo de premio: " + awardMode;
 	}
 }
