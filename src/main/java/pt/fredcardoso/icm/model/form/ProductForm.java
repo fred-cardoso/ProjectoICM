@@ -1,9 +1,11 @@
 package pt.fredcardoso.icm.model.form;
 
+import java.io.File;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -33,7 +35,15 @@ public class ProductForm implements Serializable {
 	@NotNull
 	@NotBlank 
 	private String name;
+	private List<File> multimedia;
 	
+	
+	public List<File> getMultimedia() {
+		return multimedia;
+	}
+	public void setMultimedia(List<File> multimedia) {
+		this.multimedia = multimedia;
+	}
 	public String getName() {
 		return name;
 	}

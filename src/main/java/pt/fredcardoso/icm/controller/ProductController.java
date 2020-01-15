@@ -1,6 +1,7 @@
 
 package pt.fredcardoso.icm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pt.fredcardoso.icm.dao.ProductDAO;
+import pt.fredcardoso.icm.model.Multimedia;
 import pt.fredcardoso.icm.model.Product;
 import pt.fredcardoso.icm.model.User;
 import pt.fredcardoso.icm.model.form.BidForm;
 import pt.fredcardoso.icm.model.form.ProductForm;
+import pt.fredcardoso.icm.services.MultimediaService;
 import pt.fredcardoso.icm.services.ProductService;
 
 @Controller
@@ -33,6 +36,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private MultimediaService multimediaService;
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String products(Model model) {
@@ -74,11 +80,12 @@ public class ProductController {
 			RedirectAttributes redirectAttributes) {
 
 		Product productCreated = null;
-
+		//List<Multimedia> multimediaCreated = new ArrayList<Multimedia>();
 		if (!result.hasErrors()) {
 			productCreated = productService.create(product, (User) request.getSession().getAttribute("user"));
+			//multimediaCreated = multimediaService.create(productCreated.getId(), productCreated.getMultimedia())
 		}
-
+		
 		if (productCreated == null) {
 			result.rejectValue("error", "Unknown error ocurred.");
 			return "products/create.html";

@@ -58,6 +58,11 @@
 									<option th:value="'auctionPeriod'">Valor máximo</option>
 								</select>
 							</div>
+							
+							<div class="form-group">
+						<label>Select files:</label> <input  accept="image/png, image/jpeg, 
+						audio/mpeg, audio/ogg, video/ogg" th:field="*{multimedia}" th:type="file" multiple><br><br>
+							</div>
 						</div>
 
 						<button type="submit" class="btn btn-default" wfd-id="147">Submit

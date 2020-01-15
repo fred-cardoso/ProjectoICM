@@ -1,7 +1,11 @@
 package pt.fredcardoso.icm.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -10,7 +14,9 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import pt.fredcardoso.icm.model.Product;
 import pt.fredcardoso.icm.services.MultimediaService;
@@ -32,12 +38,37 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public Product create(Product product) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String sql = "INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)";
+		/***String sql = "INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)";
 		if (jdbcTemplate.update(sql, product.getName(),  product.getDescription(), product.getMinimumSalePrice(), dateFormat.format(product.getAuctionPeriod()), product.getAwardMode(), product.getUser().getId()) > 0) {
 			return this.read(product.getId()).get(0);
 		} else {
 			return null;
-		}
+		}***/
+		
+		final String name =product.getName();
+		final String description = product.getDescription();
+		final double minimum_sale_price = product.getMinimumSalePrice();
+		final String getAuctionPeriod = dateFormat.format(product.getAuctionPeriod());
+		final String award_mode = product.getAwardMode();
+		final int userID = product.getUser().getId();
+		GeneratedKeyHolder holder = new GeneratedKeyHolder();
+		jdbcTemplate.update(new PreparedStatementCreator() {
+		    public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+		        PreparedStatement statement = con.prepareStatement("INSERT INTO product (name, description, minimum_sale_price, auction_period, award_mode, userID) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		        statement.setString(1, name);
+		        statement.setString(2, description);
+		        statement.setDouble(3, minimum_sale_price);
+		        statement.setString(4, getAuctionPeriod);
+		        statement.setString(5, award_mode);
+		        statement.setInt(6, userID);
+		        return statement;
+		    }
+
+		}, holder);
+
+		int primaryKey = holder.getKey().intValue();
+		return this.read(primaryKey).get(0);
+		
 	}
 
 	public List<Product> read(int productId) {

@@ -11,6 +11,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private ProductDAO productDao;
+	
+	@Autowired
+	private MultimediaService multimediaService;
 
 	public Product create(ProductForm productForm, User user) {
 		Product product = new Product();
@@ -20,7 +23,10 @@ public class ProductServiceImpl implements ProductService {
 		product.setAuctionPeriod(productForm.getAuctionPeriod());
 		product.setAwardMode(productForm.getAwardMode());
 		product.setUser(user);
+		Product insertedProduct = productDao.create(product);
 		
-		return productDao.create(product);
+		multimediaService.create(insertedProduct.getId(), productForm.getMultimedia());
+		
+		return insertedProduct;
 	}
 }
