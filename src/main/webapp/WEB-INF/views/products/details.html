@@ -27,29 +27,33 @@
 				<h6 class="m-0 font-weight-bold text-primary">[[${product.getName()}]]</h6>
 			</div>
 			<div class="card-body">
-				<p>Nome do produto: [[${product.getName()}]]</p>
-				<p>Descrição do produto: [[${product.getName()}]]</p>
-				<p>Preço de venda mínimo: [[${product.getMinimumSalePrice()}]]</p>
-				<p>Período de leilão: [[${product.getAuctionPeriod()}]]</p>
-				<p>Vendedor: [[${product.getUser().getName()}]]</p>
-				<div class="col-md-12">
-					<th:block th:each="multimedia : ${product.getMultimedia()}">
-						<th:block
-							th:switch="${#strings.substringAfter(multimedia.getPath(),'.')}">
-							<img th:case="'png'" th:src="${multimedia.getPath()}"
-								class="img-responsive" style="max-width: 100%" />
-							<img th:case="'jpg'" th:src="${multimedia.getPath()}"
-								class="img-responsive" style="max-width: 100%" />
-							<video th:case="'mp4'" th:src="${multimedia.getPath()}"
-								class="img-responsive" style="max-width: 100%" controls>
-								<source src="${multimedia.getPath()}" type="video/mp4">
-							</video>
-							<video th:case="'avi'" th:src="${multimedia.getPath()}"
-								class="img-responsive" style="max-width: 100%" controls>
-								<source src="${multimedia.getPath()}" type="video/avi">
-							</video>
+				<div class="row">
+					<div class="col-md-8">
+						<th:block th:each="multimedia : ${product.getMultimedia()}">
+							<th:block
+								th:switch="${#strings.substringAfter(multimedia.getPath(),'.')}">
+								<img th:case="'png'" th:src="${multimedia.getPath()}"
+									class="img-responsive" style="max-width: 100%" />
+								<img th:case="'jpg'" th:src="${multimedia.getPath()}"
+									class="img-responsive" style="max-width: 100%" />
+								<video th:case="'mp4'" th:src="${multimedia.getPath()}"
+									class="img-responsive" style="max-width: 100%" controls>
+									<source src="${multimedia.getPath()}" type="video/mp4">
+								</video>
+								<video th:case="'avi'" th:src="${multimedia.getPath()}"
+									class="img-responsive" style="max-width: 100%" controls>
+									<source src="${multimedia.getPath()}" type="video/avi">
+								</video>
+							</th:block>
 						</th:block>
-					</th:block>
+					</div>
+					<div class="col-md-4">
+						<p>Nome do produto: [[${product.getName()}]]</p>
+						<p>Descrição do produto: [[${product.getName()}]]</p>
+						<p>Preço de venda mínimo: [[${product.getMinimumSalePrice()}]]</p>
+						<p>Período de leilão: [[${product.getAuctionPeriod()}]]</p>
+						<p>Vendedor: [[${product.getUser().getName()}]]</p>
+					</div>
 				</div>
 			</div>
 		</div>
