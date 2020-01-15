@@ -27,6 +27,8 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
+import pt.fredcardoso.icm.dao.BidDAO;
+import pt.fredcardoso.icm.dao.BidDAOImpl;
 import pt.fredcardoso.icm.dao.MultimediaDAO;
 import pt.fredcardoso.icm.dao.MultimediaDAOImpl;
 import pt.fredcardoso.icm.dao.ProductDAO;
@@ -34,6 +36,8 @@ import pt.fredcardoso.icm.dao.ProductDAOImpl;
 import pt.fredcardoso.icm.dao.UserDAO;
 import pt.fredcardoso.icm.dao.UserDAOImpl;
 import pt.fredcardoso.icm.handlerInterceptors.AuthHandler;
+import pt.fredcardoso.icm.services.BidService;
+import pt.fredcardoso.icm.services.BidServiceImpl;
 import pt.fredcardoso.icm.services.MultimediaService;
 import pt.fredcardoso.icm.services.MultimediaServiceImpl;
 import pt.fredcardoso.icm.services.ProductService;
@@ -149,5 +153,15 @@ public class MvcConfiguration implements WebMvcConfigurer, ApplicationContextAwa
 	@Bean
 	public MultimediaService getMultimediaService() {
 		return new MultimediaServiceImpl();
+	}
+	
+	@Bean
+	public BidDAO getBidDAO() {
+		return new BidDAOImpl(getDataSource());
+	}
+
+	@Bean
+	public BidService getBidService() {
+		return new BidServiceImpl();
 	}
 }
