@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pt.fredcardoso.icm.dao.ProductDAO;
 import pt.fredcardoso.icm.model.Product;
 import pt.fredcardoso.icm.model.User;
+import pt.fredcardoso.icm.model.form.BidForm;
 import pt.fredcardoso.icm.model.form.ProductForm;
 import pt.fredcardoso.icm.services.ProductService;
 
@@ -56,6 +57,7 @@ public class ProductController {
 		product = products.get(0);
 
 		model.addAttribute("product", product);
+		model.addAttribute("bid", new BidForm());
 
 		return "products/details.html";
 	}
@@ -78,8 +80,7 @@ public class ProductController {
 		}
 
 		if (productCreated == null) {
-			System.out.println(result.getAllErrors());
-			//result.rejectValue("error", "Unknown error ocurred.");
+			result.rejectValue("error", "Unknown error ocurred.");
 			return "products/create.html";
 		}
 
