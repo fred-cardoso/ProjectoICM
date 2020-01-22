@@ -86,7 +86,7 @@ public class ProductController {
 		}
 		
 		if (productCreated == null) {
-			result.rejectValue("error", "Unknown error ocurred.");
+			result.reject("Unknown error ocurred.");
 			return "products/create.html";
 		}
 
