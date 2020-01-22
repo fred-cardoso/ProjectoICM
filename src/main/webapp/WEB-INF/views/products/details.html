@@ -57,14 +57,14 @@
 						<hr>
 						<form role="form" action="#" method="post"
 							th:action="@{/bid/create}" th:object="${bid}">
-							<div class="col-lg-4" th:if="${#fields.hasErrors('*')}">
-								<div class="card bg-danger text-white shadow">
+							<div class="col-lg-12" th:if="${fields}">
+								<div class="card bg-danger text-white shadow" th:if="${fields.hasErrors()}">
 									<div class="card-body" th:inline="text">
 										[[#{error.danger}]]
 										<ul>
 											<li class="text-white-50 small"
-												th:each="e : ${#fields.detailedErrors()}"
-												th:text="${e.fieldName + ' ' + e.message}"></li>
+												th:each="e : ${fields.getAllErrors()}"
+												th:text="${e.getObjectName() + ' ' + e.getDefaultMessage()}"></li>
 										</ul>
 									</div>
 								</div>

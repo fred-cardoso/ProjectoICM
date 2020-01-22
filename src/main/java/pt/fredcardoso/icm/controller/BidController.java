@@ -38,7 +38,7 @@ public class BidController {
 
 			if (bid.getValue() < productService.getLatestBidValue(bid.getProductId())) {
 				result.rejectValue("value", "Valor inferior ao actual. Aumente o valor da sua licitação.");
-				redirectAttributes.addFlashAttribute("fields", result.getAllErrors());
+				redirectAttributes.addFlashAttribute("fields", result);
 				return "redirect:/products/" + bid.getProductId();
 			}
 
