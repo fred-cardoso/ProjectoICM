@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pt.fredcardoso.icm.dao.ProductDAO;
 import pt.fredcardoso.icm.model.form.BidForm;
-import pt.fredcardoso.icm.validator.annotation.PasswordMatches;
 import pt.fredcardoso.icm.validator.annotation.ProductIdValid;
 
-public class ProductIdValidator implements ConstraintValidator<PasswordMatches, Object> {
+public class ProductIdValidator implements ConstraintValidator<ProductIdValid, Object> {
 
 	@Autowired
 	private ProductDAO productDao;
