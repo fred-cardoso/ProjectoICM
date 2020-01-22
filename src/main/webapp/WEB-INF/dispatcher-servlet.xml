@@ -12,6 +12,10 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<context:component-scan
 		base-package="pt.fredcardoso.*" />
 
+    <mvc:interceptors>
+            <bean class="pt.fredcardoso.icm.handlerInterceptors.SoldHandler" />
+    </mvc:interceptors>
+
 	<!-- <mvc:annotation-driven /> -->
 	<mvc:annotation-driven />
 

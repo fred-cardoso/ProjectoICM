@@ -60,8 +60,8 @@ public class BidServiceImpl implements BidService {
 		return result;
 	}
 
-	public List<Bid> getBidFromProductId(long productId) {
-		List<Bid> bids = bidDao.read(0);
+	public List<Bid> getBidFromProduct(long productId) {
+		List<Bid> bids = bidDao.read(-1);
 		List<Bid> result = new ArrayList<Bid>();
 
 		if (bids == null) {
@@ -75,5 +75,23 @@ public class BidServiceImpl implements BidService {
 		}
 
 		return result;
+	}
+
+	public Bid getLatestBid(long productId) {
+		List<Bid> bids = this.getBidFromProduct(productId);
+		Bid bid = null;
+		
+		for(Bid b : bids) {
+			if(bid == null) {
+				bid = b;
+				continue;
+			}
+			
+			if(bid.getDatetime().before(b.getDatetime())) {
+				bid = b;
+			}
+		}
+		
+		return bid;
 	}
 }
