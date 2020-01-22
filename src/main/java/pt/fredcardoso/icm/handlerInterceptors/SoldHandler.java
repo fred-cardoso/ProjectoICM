@@ -27,17 +27,19 @@ public class SoldHandler implements HandlerInterceptor {
 	  HttpServletRequest request,
 	  HttpServletResponse response, 
 	  Object handler) throws Exception {
+		
+		String path = request.getRequestURI();
+		
+		if(!path.matches("(.*)products(.*)") || path.matches("(.*)products/realtime(.*)")) {
+			return true;
+		}
 	     
 		List<Product> products = productDao.read(-1);
 		
 		for(Product p : products) {
 			if(!p.isSold() && p.getAwardMode().contentEquals(Product.AUCTION_PERIOD)) {
 				Date date = new Date();
-				
-				System.out.println("ACTUAL: "  + date);
-				System.out.println("DO PRODUTO: " + p.getAuctionPeriod());
 				if(date.after(p.getAuctionPeriod())) {
-					System.out.println("TESTE");
 					soldService.sellProductAfterAuctionPeriod(p.getId());
 				}
 			}

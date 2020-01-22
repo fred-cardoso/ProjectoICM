@@ -35,23 +35,14 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private MultimediaService multimediaService;
 
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String products(Model model) {
 
-		List<Product> rawProducts = productDao.read(-1);
-		List<Product> products = new ArrayList<Product>();
-		
-		for(Product p : rawProducts) {
-			if(!p.isSold() ) {
-				products.add(p);
-			}
-		}
-
-		model.addAttribute("products", products);
+		listProducts(model);
 
 		return "products/index.html";
 	}
@@ -61,16 +52,16 @@ public class ProductController {
 
 		List<Product> products = productDao.read(id);
 		Product product = null;
-		
-		if(products == null) {
+
+		if (products == null) {
 			return "redirect:/404";
 		}
-		
+
 		product = products.get(0);
 
 		BidForm bidForm = new BidForm();
 		bidForm.setProductId(id);
-		
+
 		model.addAttribute("product", product);
 		model.addAttribute("bid", bidForm);
 		model.addAttribute("latestBidValue", productService.getLatestBidValue(id));
@@ -86,16 +77,17 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String create(@Valid @ModelAttribute("product") ProductForm product, BindingResult result, HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
+	public String create(@Valid @ModelAttribute("product") ProductForm product, BindingResult result,
+			HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
 		Product productCreated = null;
-		//List<Multimedia> multimediaCreated = new ArrayList<Multimedia>();
+		// List<Multimedia> multimediaCreated = new ArrayList<Multimedia>();
 		if (!result.hasErrors()) {
 			productCreated = productService.create(product, (User) request.getSession().getAttribute("user"));
-			//multimediaCreated = multimediaService.create(productCreated.getId(), productCreated.getMultimedia())
+			// multimediaCreated = multimediaService.create(productCreated.getId(),
+			// productCreated.getMultimedia())
 		}
-		
+
 		if (productCreated == null) {
 			result.reject("Unknown error ocurred.");
 			return "products/create.html";
@@ -106,7 +98,7 @@ public class ProductController {
 		return "redirect:/products";
 	}
 
-	//@Transactional
+	// @Transactional
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(@ModelAttribute("product") Product product, RedirectAttributes redirectAttributes) {
 
@@ -117,7 +109,7 @@ public class ProductController {
 		return "redirect:/users";
 	}
 
-	//@Transactional
+	// @Transactional
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
 	public String delete(@PathVariable(value = "id") int id, Model model, RedirectAttributes redirectAttributes) {
 
@@ -133,22 +125,34 @@ public class ProductController {
 
 		return "redirect:/products";
 	}
-	
+
 	@RequestMapping(value = { "/realtime" }, method = RequestMethod.GET)
 	public String realTime(Model model, RedirectAttributes redirectAttributes) {
-		
-		List<Product> products = productDao.read(-1);
 
-		model.addAttribute("products", products);
+		listProducts(model);
 
 		return "products/realtime.html";
 	}
-	
+
 	@RequestMapping(value = { "/realtime/{id}" }, method = RequestMethod.GET)
-	public String realTimeShowGraph(@PathVariable(value = "id") int id, Model model, RedirectAttributes redirectAttributes) {
-		
+	public String realTimeShowGraph(@PathVariable(value = "id") int id, Model model,
+			RedirectAttributes redirectAttributes) {
+
 		model.addAttribute("product", id);
 
 		return "products/graph.html";
+	}
+
+	private void listProducts(Model model) {
+		List<Product> rawProducts = productDao.read(-1);
+		List<Product> products = new ArrayList<Product>();
+
+		for (Product p : rawProducts) {
+			if (!p.isSold()) {
+				products.add(p);
+			}
+		}
+
+		model.addAttribute("products", products);
 	}
 }
