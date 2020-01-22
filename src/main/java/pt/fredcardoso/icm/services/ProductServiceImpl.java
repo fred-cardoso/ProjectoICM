@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 		return insertedProduct;
 	}
 
-	public float getLatestBid(long productId) {
+	public float getLatestBidValue(long productId) {
 		List<Product> products = productDao.read(productId);
 		float result = 0f;
 		

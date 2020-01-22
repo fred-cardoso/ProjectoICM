@@ -8,6 +8,6 @@ public interface ProductService {
 
 	public Product create(ProductForm productForm, User user);
 	
-	public float getLatestBid(long productId);
+	public float getLatestBidValue(long productId);
 	
 }

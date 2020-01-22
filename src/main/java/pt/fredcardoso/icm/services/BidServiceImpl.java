@@ -27,7 +27,7 @@ public class BidServiceImpl implements BidService {
 	public Bid create(BidForm bidForm, User user) {
 		Product product = productDao.read(bidForm.getProductId()).get(0);
 		
-		if(productService.getLatestBid(product.getId()) > bidForm.getValue()) {
+		if(productService.getLatestBidValue(product.getId()) > bidForm.getValue()) {
 			return null;
 		}
 		
