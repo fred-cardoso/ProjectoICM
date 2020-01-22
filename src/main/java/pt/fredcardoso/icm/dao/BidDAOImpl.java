@@ -31,7 +31,7 @@ public class BidDAOImpl implements BidDAO {
 				PreparedStatement statement = con.prepareStatement(
 						"INSERT INTO bid (datetime, value, userid, productid) VALUES (?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
-				statement.setDate(1, (java.sql.Date) bid.getDatetime());
+				statement.setDate(1, new java.sql.Date(bid.getDatetime().getTime()));
 				statement.setFloat(2, bid.getValue());
 				statement.setLong(3, bid.getUserId());
 				statement.setLong(4, bid.getProductId());
