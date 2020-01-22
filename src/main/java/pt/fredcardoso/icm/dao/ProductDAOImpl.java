@@ -74,7 +74,7 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 
-	public List<Product> read(int productId) {
+	public List<Product> read(long productId) {
 		String sql = "SELECT * FROM product";
 		Object[] obj = null;
 
@@ -97,7 +97,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	}
 
-	public void delete(int productId) {
+	public void delete(long productId) {
 		jdbcTemplate.update("DELETE FROM product WHERE id = ?", new Object[] { productId });
 	}
 
