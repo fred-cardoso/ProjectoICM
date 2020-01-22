@@ -20,6 +20,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import pt.fredcardoso.icm.model.Product;
 import pt.fredcardoso.icm.services.BidService;
 import pt.fredcardoso.icm.services.MultimediaService;
+import pt.fredcardoso.icm.services.SoldService;
 
 public class ProductDAOImpl implements ProductDAO {
 	
@@ -31,6 +32,9 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Autowired
 	private BidService bidService;
+	
+	@Autowired
+	private SoldService soldService;
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -115,6 +119,7 @@ public class ProductDAOImpl implements ProductDAO {
 			product.setUser(userDAO.read(rs.getInt("userId")).get(0));
 			product.setMultimedia(multimediaService.getMultimediaOfProduct(product.getId()));
 			product.setBids(bidService.getBidFromProductId(product.getId()));
+			product.setSold(soldService.checkSoldFromProductId(product.getId()));
 			
 			return product;
 		}

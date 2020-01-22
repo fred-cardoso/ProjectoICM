@@ -17,6 +17,7 @@ public class Product {
 	private User user;
 	private List<Multimedia> multimedia;
 	private List<Bid> bids;
+	private boolean isSold;
 
 	public int getId() {
 		return id;
@@ -86,6 +87,14 @@ public class Product {
 
 	public void setBids(List<Bid> bids) {
 		this.bids = bids;
+	}
+	
+	public boolean isSold() {
+		return isSold;
+	}
+
+	public void setSold(boolean isSold) {
+		this.isSold = isSold;
 	}
 
 	@Override

@@ -33,6 +33,8 @@ import pt.fredcardoso.icm.dao.MultimediaDAO;
 import pt.fredcardoso.icm.dao.MultimediaDAOImpl;
 import pt.fredcardoso.icm.dao.ProductDAO;
 import pt.fredcardoso.icm.dao.ProductDAOImpl;
+import pt.fredcardoso.icm.dao.SoldDAO;
+import pt.fredcardoso.icm.dao.SoldDAOImpl;
 import pt.fredcardoso.icm.dao.UserDAO;
 import pt.fredcardoso.icm.dao.UserDAOImpl;
 import pt.fredcardoso.icm.handlerInterceptors.AuthHandler;
@@ -42,6 +44,8 @@ import pt.fredcardoso.icm.services.MultimediaService;
 import pt.fredcardoso.icm.services.MultimediaServiceImpl;
 import pt.fredcardoso.icm.services.ProductService;
 import pt.fredcardoso.icm.services.ProductServiceImpl;
+import pt.fredcardoso.icm.services.SoldService;
+import pt.fredcardoso.icm.services.SoldServiceImpl;
 import pt.fredcardoso.icm.services.UserService;
 import pt.fredcardoso.icm.services.UserServiceImpl;
 import pt.fredcardoso.icm.utils.ArrayUtil;
@@ -163,5 +167,15 @@ public class MvcConfiguration implements WebMvcConfigurer, ApplicationContextAwa
 	@Bean
 	public BidService getBidService() {
 		return new BidServiceImpl();
+	}
+	
+	@Bean
+	public SoldDAO getSoldDAO() {
+		return new SoldDAOImpl(getDataSource());
+	}
+	
+	@Bean
+	public SoldService getSoldService() {
+		return new SoldServiceImpl();
 	}
 }

@@ -1,6 +1,7 @@
 
 package pt.fredcardoso.icm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,14 @@ public class ProductController {
 	@RequestMapping(value = { "/", "" }, method = RequestMethod.GET)
 	public String products(Model model) {
 
-		List<Product> products = productDao.read(-1);
+		List<Product> rawProducts = productDao.read(-1);
+		List<Product> products = new ArrayList<Product>();
+		
+		for(Product p : rawProducts) {
+			if(!p.isSold() ) {
+				products.add(p);
+			}
+		}
 
 		model.addAttribute("products", products);
 
