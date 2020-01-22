@@ -16,6 +16,7 @@ public class Product {
 	private String name;
 	private User user;
 	private List<Multimedia> multimedia;
+	private List<Bid> bids;
 
 	public int getId() {
 		return id;
@@ -77,6 +78,14 @@ public class Product {
 
 	public void setMultimedia(List<Multimedia> multimedia) {
 		this.multimedia = multimedia;
+	}
+
+	public List<Bid> getBids() {
+		return bids;
+	}
+
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
 	}
 
 	@Override

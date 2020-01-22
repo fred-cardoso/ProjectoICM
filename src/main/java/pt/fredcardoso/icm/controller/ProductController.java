@@ -1,7 +1,6 @@
 
 package pt.fredcardoso.icm.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pt.fredcardoso.icm.dao.ProductDAO;
-import pt.fredcardoso.icm.model.Multimedia;
 import pt.fredcardoso.icm.model.Product;
 import pt.fredcardoso.icm.model.User;
 import pt.fredcardoso.icm.model.form.BidForm;

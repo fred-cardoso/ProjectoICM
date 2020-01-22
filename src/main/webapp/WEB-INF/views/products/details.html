@@ -53,6 +53,8 @@
 						<p>Preço de venda mínimo: [[${product.getMinimumSalePrice()}]]</p>
 						<p>Período de leilão: [[${product.getAuctionPeriod()}]]</p>
 						<p>Vendedor: [[${product.getUser().getName()}]]</p>
+						<p th:if="${product.getBids().size() < 1}">Preço de venda atual: Sem ofertas!</p>
+						<p th:unless="${product.getBids().size() < 1}">Preço de venda atual: [[${product.getBids().get(product.getBids().size() - 1).getValue()}]]</p>
 					</div>
 				</div>
 			</div>

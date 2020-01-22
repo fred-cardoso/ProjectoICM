@@ -1,6 +1,8 @@
 package pt.fredcardoso.icm.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,5 +32,22 @@ public class BidServiceImpl implements BidService {
 		bid.setProductId(product.getId());
 		
 		return bidDao.create(bid);
+	}
+	
+	public List<Bid> getBidFromProductId(long productId) {
+		List<Bid> bids = bidDao.read(0);
+		List<Bid> result = new ArrayList<Bid>();
+		
+		if(bids == null) {
+			return result;
+		}
+		
+		for (Bid bid : bids) {
+			if (bid.getProductId() == productId) {
+				result.add(bid);
+			}
+		}
+		
+		return result;
 	}
 }

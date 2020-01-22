@@ -1,7 +1,6 @@
 package pt.fredcardoso.icm.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import pt.fredcardoso.icm.model.Product;
+import pt.fredcardoso.icm.services.BidService;
 import pt.fredcardoso.icm.services.MultimediaService;
 
 public class ProductDAOImpl implements ProductDAO {
@@ -27,7 +27,10 @@ public class ProductDAOImpl implements ProductDAO {
 	private UserDAO userDAO;
 	
 	@Autowired
-	private MultimediaService multimediaService; 
+	private MultimediaService multimediaService;
+	
+	@Autowired
+	private BidService bidService;
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -111,7 +114,8 @@ public class ProductDAOImpl implements ProductDAO {
 			product.setAwardMode(rs.getString("award_mode"));
 			product.setUser(userDAO.read(rs.getInt("userId")).get(0));
 			product.setMultimedia(multimediaService.getMultimediaOfProduct(product.getId()));
-
+			product.setBids(bidService.getBidFromProductId(product.getId()));
+			
 			return product;
 		}
 
