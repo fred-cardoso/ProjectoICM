@@ -20,9 +20,16 @@ public class BidServiceImpl implements BidService {
 	
 	@Autowired
 	private ProductDAO productDao;
+	
+	@Autowired
+	private ProductService productService;
 
 	public Bid create(BidForm bidForm, User user) {
 		Product product = productDao.read(bidForm.getProductId()).get(0);
+		
+		if(productService.getLatestBid(product.getId()) > bidForm.getValue()) {
+			return null;
+		}
 		
 		Bid bid = new Bid();
 		

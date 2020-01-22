@@ -1,7 +1,5 @@
 package pt.fredcardoso.icm.services;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

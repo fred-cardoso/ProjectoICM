@@ -53,13 +53,27 @@
 						<p>Preço de venda mínimo: [[${product.getMinimumSalePrice()}]]</p>
 						<p>Período de leilão: [[${product.getAuctionPeriod()}]]</p>
 						<p>Vendedor: [[${product.getUser().getName()}]]</p>
-						<p th:if="${product.getBids().size() < 1}">Preço de venda atual: Sem ofertas!</p>
-						<p th:unless="${product.getBids().size() < 1}">Preço de venda atual: [[${product.getBids().get(product.getBids().size() - 1).getValue()}]]</p>
+						<p th:if="${latestBidValue}">Valor da última oferta: [[${latestBidValue}]]</p>
+						<hr>
+						<form role="form" action="#" method="post"
+							th:action="@{/bid/create}" th:object="${bid}">
+							<div class="col-lg-12">
+
+								<div class="form-group">
+									<label>Valor</label> <input type="number" step="0.01" class="form-control"
+										th:field="*{value}"> <input type="hidden"
+										th:field="*{productId}" th:value="${product.getId()}">
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-default">Submit
+								Button</button>
+						</form>
+
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<!-- /.container-fluid -->
 </body>

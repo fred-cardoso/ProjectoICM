@@ -40,4 +40,9 @@ public class Bid {
 	public void setProductId(long productId) {
 		this.productId = productId;
 	}
+	
+	@Override
+	public String toString() {
+		return "Bid com ID: " + this.id + ", de valor: " + this.value + " e produto com ID: " + productId;
+	}
 }
