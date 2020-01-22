@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pt.fredcardoso.icm.dao.ProductDAO;
-import pt.fredcardoso.icm.model.form.BidForm;
 import pt.fredcardoso.icm.validator.annotation.ProductIdValid;
 
 public class ProductIdValidator implements ConstraintValidator<ProductIdValid, Object> {
@@ -18,9 +17,9 @@ public class ProductIdValidator implements ConstraintValidator<ProductIdValid, O
 	}
 
 	public boolean isValid(Object obj, ConstraintValidatorContext context){
-      BidForm bid = (BidForm) obj;
+      int productId = (Integer) obj;
       
-      if(productDao.read(bid.getProductId()) == null) {
+      if(productDao.read(productId) == null) {
     	  return false;
       }
       
