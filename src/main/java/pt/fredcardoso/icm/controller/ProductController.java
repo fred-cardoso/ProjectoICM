@@ -60,8 +60,11 @@ public class ProductController {
 		
 		product = products.get(0);
 
+		BidForm bidForm = new BidForm();
+		bidForm.setProductId(id);
+		
 		model.addAttribute("product", product);
-		model.addAttribute("bid", new BidForm());
+		model.addAttribute("bid", bidForm);
 		model.addAttribute("latestBidValue", productService.getLatestBidValue(id));
 
 		return "products/details.html";
