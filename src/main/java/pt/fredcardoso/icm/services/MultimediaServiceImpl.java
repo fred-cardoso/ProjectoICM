@@ -86,9 +86,12 @@ public class MultimediaServiceImpl implements MultimediaService {
 		try {
 			newFile.createNewFile();
 
-			// BufferedImage image = ImageIO.read(saveMedia);
-			// ImageIO.write(image, "jpg", newFile);
-			if(getExtension(saveMedia.getName()).equalsIgnoreCase(".mp3") || getExtension(saveMedia.getName()).equalsIgnoreCase(".mp3")) {
+			
+			if(getExtension(saveMedia.getName()).equalsIgnoreCase(".png")) {
+				BufferedImage image = ImageIO.read(saveMedia);
+				ImageIO.write(image, "png", newFile);
+			};
+			if(getExtension(saveMedia.getName()).equalsIgnoreCase(".mp3")) {
 				copyAudio(saveMedia,newFile);
 			}else {
 
@@ -97,6 +100,7 @@ public class MultimediaServiceImpl implements MultimediaService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 
 		/*
 		 * try { //create FileInputStream object
