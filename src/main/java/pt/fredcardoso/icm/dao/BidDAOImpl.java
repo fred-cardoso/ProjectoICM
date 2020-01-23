@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -31,7 +33,7 @@ public class BidDAOImpl implements BidDAO {
 				PreparedStatement statement = con.prepareStatement(
 						"INSERT INTO bid (datetime, value, userid, productid) VALUES (?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);
-				statement.setDate(1, new java.sql.Date(bid.getDatetime().getTime()));
+				statement.setTimestamp(1, new Timestamp(bid.getDatetime().getTime()));
 				statement.setFloat(2, bid.getValue());
 				statement.setLong(3, bid.getUserId());
 				statement.setLong(4, bid.getProductId());
@@ -77,7 +79,7 @@ public class BidDAOImpl implements BidDAO {
 			Bid bid = new Bid();
 
 			bid.setId(rs.getInt("id"));
-			bid.setDatetime(rs.getDate("datetime"));
+			bid.setDatetime(new Date(rs.getTimestamp("datetime").getTime()));
 			bid.setValue(rs.getFloat("value"));
 			bid.setUserId(rs.getLong("userId"));
 			bid.setProductId(rs.getLong("productId"));

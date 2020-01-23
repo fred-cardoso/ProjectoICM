@@ -121,7 +121,7 @@ public class ProductDAOImpl implements ProductDAO {
 			product.setAwardMode(rs.getString("award_mode"));
 			product.setUser(userDAO.read(rs.getInt("userId")).get(0));
 			product.setMultimedia(multimediaService.getMultimediaOfProduct(product.getId()));
-			product.setBids(bidService.getBidFromProduct(product.getId()));
+			product.setBids(bidService.getBidsFromProduct(product.getId()));
 			product.setSold(soldService.checkSoldFromProductId(product.getId()));
 			
 			return product;

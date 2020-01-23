@@ -1,4 +1,5 @@
 var ctx = document.getElementById("myAreaChart");
+var pId = document.getElementById("productId").value;
 var myLineChart;
 var waiting = false;
 
@@ -12,16 +13,23 @@ function show_chart() {
 	const socketConn = new WebSocket('ws://localhost:8080/api');
 
     function send() {
-            socketConn.send("test");
+            socketConn.send(pId);
     }
 
     socketConn.onmessage = (e) => {
     	
-    	data = JSON.parse(e.data);
+    	var raw_data = JSON.parse(e.data);
     	
-    	console.log(myLineChart.data.datasets[0].data);
+    	var labels = Object.keys(raw_data);
+    	
+    	data = [];
+    	
+    	labels.forEach(function(key) {
+    		data.push(raw_data[key]);
+    	});
     	
     	myLineChart.data.datasets[0].data = data;
+    	myLineChart.data.labels = labels;
     	
     	myLineChart.update(0);
     	
