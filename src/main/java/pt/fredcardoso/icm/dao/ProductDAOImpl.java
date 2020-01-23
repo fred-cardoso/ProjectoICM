@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -110,15 +111,17 @@ public class ProductDAOImpl implements ProductDAO {
 		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Product product = new Product();
 
+			
+			
 			product.setId(rs.getInt("id"));
 			product.setName(rs.getString("name"));
 			product.setDescription(rs.getString("description"));
 			product.setMinimumSalePrice(rs.getDouble("minimum_sale_price"));
-			product.setAuctionPeriod(rs.getDate("auction_period"));
+			product.setAuctionPeriod(new Date(rs.getTimestamp("auction_period").getTime()));
 			product.setAwardMode(rs.getString("award_mode"));
 			product.setUser(userDAO.read(rs.getInt("userId")).get(0));
 			product.setMultimedia(multimediaService.getMultimediaOfProduct(product.getId()));
-			product.setBids(bidService.getBidFromProductId(product.getId()));
+			product.setBids(bidService.getBidFromProduct(product.getId()));
 			product.setSold(soldService.checkSoldFromProductId(product.getId()));
 			
 			return product;

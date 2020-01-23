@@ -10,6 +10,8 @@ public interface BidService {
 
 	public Bid create(BidForm bidForm, User user);
 	
-	public List<Bid> getBidFromProductId(long productId);
+	public List<Bid> getBidFromProduct(long productId);
+	
+	public Bid getLatestBid(long productId);
 	
 }
