@@ -18,6 +18,8 @@ function show_chart() {
 
     socketConn.onmessage = (e) => {
     	
+    	console.log("A receber dados...")
+    	
     	var raw_data = JSON.parse(e.data);
     	
     	var labels = Object.keys(raw_data);
@@ -39,14 +41,15 @@ function show_chart() {
     function myLoop () {
     	   setTimeout(function () {
     		   if(!waiting) {
-    			   send();
+    			   //send();
+    			   //console.log("A enviar pedido");
     			   waiting = true;
     		   }
     		   myLoop();
     	   }, 1000)
     	}
 
-    myLoop();
+    socketConn.onopen = () => send();
     create_chart(labels, data);
 }
 
