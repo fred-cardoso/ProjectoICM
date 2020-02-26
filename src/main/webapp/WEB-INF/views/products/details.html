@@ -44,6 +44,10 @@
 									class="img-responsive" style="max-width: 100%" controls>
 									<source src="${multimedia.getPath()}" type="video/avi">
 								</video>
+								<audio th:case="'mp3'" controls>
+									<source src="${multimedia.getPath()}" type="audio/mpeg">
+									Your browser does not support the audio element.
+								</audio>
 							</th:block>
 						</th:block>
 					</div>
@@ -56,9 +60,11 @@
 							[[${latestBidValue}]]</p>
 						<hr>
 						<form role="form" action="#" method="post"
-							th:action="@{/bid/create}" th:object="${bid}" th:if="${!product.isSold()}">
+							th:action="@{/bid/create}" th:object="${bid}"
+							th:if="${!product.isSold()}">
 							<div class="col-lg-12" th:if="${fields}">
-								<div class="card bg-danger text-white shadow" th:if="${fields.hasErrors()}">
+								<div class="card bg-danger text-white shadow"
+									th:if="${fields.hasErrors()}">
 									<div class="card-body" th:inline="text">
 										[[#{error.danger}]]
 										<ul>
