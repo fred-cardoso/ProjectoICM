@@ -22,6 +22,7 @@ public class AuthHandler implements HandlerInterceptor {
 		user.setEmail("fredecardoso@hotmail.com");
 		user.setId(14);
 		user.setName("Frederico Cardoso");
+		user.setAdmin(true);
 		request.getSession().setAttribute("user", user);
 		
 		if(request.getSession(false) != null && request.getSession(false).getAttribute("user") != null) {
