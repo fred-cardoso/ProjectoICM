@@ -33,27 +33,27 @@
 							<tr>
 								<th>ID</th>
 								<th>Name</th>
-								<th>Valor máximo de venda</th>
-								<th>Prazo máximo de venda</th>
-								<th>Açoes</th>
+								<th>Valor mï¿½ximo de venda</th>
+								<th>Prazo mï¿½ximo de venda</th>
+								<th th:if="${session.user.isAdmin()}">Aï¿½oes</th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>ID</th>
 								<th>Name</th>
-								<th>Valor máximo de venda</th>
-								<th>Prazo máximo de venda</th>
-								<th>Açoes</th>
+								<th>Valor mï¿½ximo de venda</th>
+								<th>Prazo mï¿½ximo de venda</th>
+								<th th:if="${session.user.isAdmin()}">Aï¿½oes</th>
 							</tr>
 						</tfoot>
 						<tbody>
 							<tr th:each="product : ${products}">
 								<td th:text="${product.getId()}">1</td>
-								<td> <a href="#" th:text="${product.getName()}">1</a></td>
-								<td><a th:href="@{'/products/' + ${product.getId()}}" th:text="${product.getMinimumSalePrice()}"></a></td>
+								<td> <a th:href="@{'/products/' + ${product.getId()}}" th:text="${product.getName()}">1</a></td>
+								<td th:text="${product.getMinimumSalePrice()}"></td>
 								<td th:text="${product.getAuctionPeriod()}"></td>
-								<td><a
+								<td th:if="${session.user.isAdmin()}"><a
 									th:href="@{'/products/delete/' + ${product.getId()}}"
 									class="btn btn-danger btn-circle btn-sm"> <i
 										class="fas fa-trash"></i>
