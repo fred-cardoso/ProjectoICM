@@ -25,6 +25,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 import pt.fredcardoso.icm.dao.BidDAO;
@@ -178,4 +179,5 @@ public class MvcConfiguration implements WebMvcConfigurer, ApplicationContextAwa
 	public SoldService getSoldService() {
 		return new SoldServiceImpl();
 	}
+	
 }
